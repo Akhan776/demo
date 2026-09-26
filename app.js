@@ -7,7 +7,7 @@ const dishes=[
  {name:'Cookies & Cream Shake',category:'sweet',price:7,description:'Thick, cold, creamy, and finished with cookie crumble',image:'https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=800&q=80'}
 ];
 let basket=[];const grid=document.querySelector('#menu-grid');
-function renderMenu(category='all'){grid.innerHTML=dishes.filter(d=>category==='all'||d.category===category).map((d,i)=>`<article class="menu-card" style="animation-delay:${i*50}ms"><div class="menu-card-image" style="background-image:url('${d.image}')"></div><div class="menu-card-body"><div class="menu-card-top"><h3>${d.name}</h3><span class="price">$${d.price}</span></div><p>${d.description}</p><button class="add-btn" data-add="${d.name}">Add to basket +</button></div></article>`).join('');grid.querySelectorAll('[data-add]').forEach(btn=>btn.addEventListener('click',()=>{basket.push(dishes.find(d=>d.name===btn.dataset.add));renderBasket();document.querySelector('.cart-drawer').classList.add('open');document.querySelector('.drawer-backdrop').classList.add('open')}))}
+function renderMenu(category='all'){grid.innerHTML=dishes.filter(d=>category==='all'||d.category===category).map((d,i)=>`<article class="menu-card" style="animation-delay:${i*50}ms"><div class="menu-card-image" style="--dish-image:url('${d.image}')"></div><div class="menu-card-body"><div class="menu-card-top"><h3>${d.name}</h3><span class="price">$${d.price}</span></div><p>${d.description}</p><button class="add-btn" data-add="${d.name}">Add to basket +</button></div></article>`).join('');grid.querySelectorAll('[data-add]').forEach(btn=>btn.addEventListener('click',()=>{basket.push(dishes.find(d=>d.name===btn.dataset.add));renderBasket();document.querySelector('.cart-drawer').classList.add('open');document.querySelector('.drawer-backdrop').classList.add('open')}))}
 function renderBasket(){document.querySelector('.cart-count').textContent=basket.length;const items=document.querySelector('.cart-items'),empty=document.querySelector('.cart-empty'),total=document.querySelector('.cart-total strong span');empty.style.display=basket.length?'none':'block';items.innerHTML=basket.map((d,i)=>`<div class="cart-item"><div><strong>${d.name}</strong><small>$${d.price}</small></div><button class="remove-item" data-remove="${i}">Remove</button></div>`).join('');items.querySelectorAll('[data-remove]').forEach(b=>b.addEventListener('click',()=>{basket.splice(+b.dataset.remove,1);renderBasket()}));total.textContent=basket.reduce((sum,d)=>sum+d.price,0)}
 renderMenu();renderBasket();
 document.querySelectorAll('.menu-tabs button').forEach(b=>b.addEventListener('click',()=>{document.querySelector('.menu-tabs .active').classList.remove('active');b.classList.add('active');renderMenu(b.dataset.category)}));
@@ -27,6 +27,8 @@ document.addEventListener('pointermove',event=>{
  const rect=image.getBoundingClientRect();
  const x=(event.clientX-rect.left)/rect.width-.5;
  const y=(event.clientY-rect.top)/rect.height-.5;
+ image.style.setProperty('--depth-x',`${x*18}px`);
+ image.style.setProperty('--depth-y',`${y*18}px`);
  image.style.transform=`perspective(900px) rotateX(${y*-5}deg) rotateY(${x*5}deg) translateZ(10px) scale(1.035)`;
  image.classList.add('depth-active');
 });
@@ -34,6 +36,8 @@ document.addEventListener('pointerout',event=>{
  const image=event.target.closest('.hero-image,.story-image,.menu-card-image');
  if(!image||event.relatedTarget&&image.contains(event.relatedTarget))return;
  image.style.transform='';
+ image.style.removeProperty('--depth-x');
+ image.style.removeProperty('--depth-y');
  image.classList.remove('depth-active');
 });
 
