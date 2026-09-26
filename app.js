@@ -67,3 +67,7 @@ document.querySelectorAll('.menu-tabs button').forEach(tab=>{
  tab.addEventListener('click',()=>document.querySelectorAll('.menu-tabs button').forEach(item=>item.setAttribute('aria-selected',String(item===tab))));
 });
 
+// Reveal the foreground food layer as each visual enters the viewport.
+const depthObserver=new IntersectionObserver(entries=>entries.forEach(entry=>entry.target.classList.toggle('depth-visible',entry.isIntersecting)),{threshold:.35});
+document.querySelectorAll('.hero-image,.story-image,.menu-card-image').forEach(image=>depthObserver.observe(image));
+
