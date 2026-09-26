@@ -37,3 +37,29 @@ document.addEventListener('pointerout',event=>{
  image.classList.remove('depth-active');
 });
 
+// Small-screen navigation and keyboard-safe close behavior.
+const mobileMenu=document.querySelector('.menu-toggle');
+const primaryNav=document.querySelector('.desktop-nav');
+mobileMenu?.addEventListener('click',()=>{
+ primaryNav.classList.toggle('open');
+ mobileMenu.setAttribute('aria-expanded',String(primaryNav.classList.contains('open')));
+});
+document.querySelectorAll('.desktop-nav a').forEach(link=>link.addEventListener('click',()=>primaryNav.classList.remove('open')));
+const reservationModal=document.querySelector('#reservation-modal');
+document.querySelectorAll('[data-open-reservation]').forEach(button=>button.addEventListener('click',()=>reservationModal.setAttribute('aria-hidden','false')));
+document.querySelectorAll('[data-close-modal]').forEach(button=>button.addEventListener('click',()=>reservationModal.setAttribute('aria-hidden','true')));
+document.addEventListener('keydown',event=>{
+ if(event.key!=='Escape')return;
+ reservationModal.classList.remove('open');
+ reservationModal.setAttribute('aria-hidden','true');
+ document.querySelector('.cart-drawer').classList.remove('open');
+ document.querySelector('.drawer-backdrop').classList.remove('open');
+ primaryNav.classList.remove('open');
+ document.body.classList.remove('no-scroll');
+});
+document.querySelectorAll('.menu-tabs button').forEach(tab=>{
+ tab.setAttribute('role','tab');
+ tab.setAttribute('aria-selected',String(tab.classList.contains('active')));
+ tab.addEventListener('click',()=>document.querySelectorAll('.menu-tabs button').forEach(item=>item.setAttribute('aria-selected',String(item===tab))));
+});
+
