@@ -157,3 +157,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{
 .menu-card-image.subject-burger::after{filter:drop-shadow(0 24px 13px #18221d55) drop-shadow(0 0 7px #f8eee2aa) saturate(1.16)}
 @media (prefers-reduced-motion: reduce){.menu-card-image.subject-shake::after,.menu-card-image.subject-burger::after,.menu-card-image.subject-chicken::after,.menu-card-image.subject-fries::after{filter:none}}
 
+/* Tighter contour around the stacked burger subject */
+.menu-card-image.subject-burger::after,.hero-image::after,.story-image::after{clip-path:polygon(29% 12%,71% 12%,80% 25%,83% 48%,78% 71%,70% 84%,30% 84%,22% 71%,17% 48%,20% 25%)}
+
+
