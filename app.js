@@ -20,3 +20,20 @@ document.querySelector('#reservation-form').addEventListener('submit',e=>{e.prev
 document.querySelector('[data-open-menu]').addEventListener('click',()=>document.querySelector('#menu').scrollIntoView());
 document.querySelector('.checkout-btn').addEventListener('click',()=>alert('Demo checkout â€” connect your ordering provider here.'));
 
+// Subtle cursor depth effect for the live-photo feel.
+document.addEventListener('pointermove',event=>{
+ const image=event.target.closest('.hero-image,.story-image,.menu-card-image');
+ if(!image)return;
+ const rect=image.getBoundingClientRect();
+ const x=(event.clientX-rect.left)/rect.width-.5;
+ const y=(event.clientY-rect.top)/rect.height-.5;
+ image.style.transform=`perspective(900px) rotateX(${y*-5}deg) rotateY(${x*5}deg) translateZ(10px) scale(1.035)`;
+ image.classList.add('depth-active');
+});
+document.addEventListener('pointerout',event=>{
+ const image=event.target.closest('.hero-image,.story-image,.menu-card-image');
+ if(!image||event.relatedTarget&&image.contains(event.relatedTarget))return;
+ image.style.transform='';
+ image.classList.remove('depth-active');
+});
+
