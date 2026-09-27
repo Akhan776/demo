@@ -151,7 +151,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{
 .menu-card-image.subject-burger::after,.hero-image::after,.story-image::after{clip-path:polygon(25% 20%,38% 14%,50% 12%,62% 14%,75% 20%,84% 35%,88% 52%,84% 69%,75% 81%,25% 81%,16% 69%,12% 52%,16% 35%)}
 .menu-card-image.subject-chicken::after{clip-path:polygon(28% 21%,48% 14%,70% 21%,83% 38%,78% 65%,67% 80%,35% 80%,22% 65%,17% 38%)}
 .menu-card-image.subject-fries::after{clip-path:polygon(34% 26%,38% 6%,45% 24%,51% 3%,56% 24%,66% 10%,70% 28%,67% 84%,33% 84%,30% 28%)}
-.menu-card-image.subject-shake::after{clip-path:polygon(64% 17%,69% 17%,70% 27%,76% 31%,79% 40%,77% 84%,59% 84%,57% 40%,60% 31%,64% 27%)}
+.menu-card-image.subject-shake::after{clip-path:polygon(43% 12%,50% 12%,52% 25%,61% 31%,65% 40%,62% 84%,35% 84%,31% 40%,35% 31%,41% 25%,24% 29%,18% 20%,27% 18%,34% 25%)}
 .menu-card-image.subject-shake::before{filter:brightness(.72) saturate(.86) blur(1px)}
 .menu-card-image.subject-shake::after{filter:drop-shadow(0 24px 13px #18221d55) drop-shadow(0 0 10px #fff8) saturate(1.18)}
 .menu-card-image.subject-burger::after{filter:drop-shadow(0 24px 13px #18221d55) drop-shadow(0 0 7px #f8eee2aa) saturate(1.16)}
